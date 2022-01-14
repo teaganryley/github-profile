@@ -1,8 +1,11 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const App = () => (
   <div className="App">
-    <h1>Simple Title</h1>
+    <main>
+      <Outlet />
+    </main>
   </div>
 );
 
