@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Profile = () => (
-  <h1>Profile page</h1>
-);
+const Profile = () => {
+  const params = useParams();
+
+  useEffect(() => {
+    console.log('params object', params);
+  }, []);
+
+  return (
+    <div>
+      Profile page
+    </div>
+  );
+};
 
 export default Profile;

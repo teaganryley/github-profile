@@ -21,7 +21,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile/:login" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
