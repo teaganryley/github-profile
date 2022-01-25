@@ -1,8 +1,4 @@
-import React, {
-  useMemo,
-  useState,
-  useEffect,
-} from 'react';
+import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -10,20 +6,8 @@ import debounce from 'lodash.debounce';
 import api from '../../services/api';
 
 const SearchBar = () => {
-  const [value, setValue] = useState(null);
-  const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  // TODO:
-  // Pagination/query limit controls - 30 by default
-  // loading behaviour
-  // investigate: handleSearch fires even after navigation
-  const handleSelect = () => {
-    console.log('selection on this value', value);
-    if (value) navigate(`profile/${value.login}`);
-  };
 
   const handleSearch = useMemo(() => debounce(query => {
     api.get(`/search/users?${query}`)
@@ -36,31 +20,18 @@ const SearchBar = () => {
       });
   }, 400), []);
 
-  useEffect(
-    () => {
-      // eslint-disable-next-line prefer-template
-      const queryString = 'q=' + encodeURIComponent(`${inputValue} in:login`);
-      handleSearch(queryString);
-    },
-    [inputValue],
-  );
+  const handleInputChange = (event, inputValue) => handleSearch(`q=${encodeURIComponent(`${inputValue} in:login`)}`);
+  const handleOnChange = (event, value, reason) => (reason === 'selectOption' && value?.login) && navigate(`profile/${value.login}`);
 
   return (
     <Autocomplete
       autoComplete
       includeInputInList={false}
       id="search"
-      value={value}
-      onSelect={handleSelect}
-      onChange={(event, newValue) => {
-        // setOptions(newValue ? [newValue, ...options] : options);
-        setValue(newValue);
-      }}
-      inputValue={inputValue}
-      onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
+      onInputChange={handleInputChange}
+      onChange={handleOnChange}
       options={options}
-      filterOptions={x => x}
-      getOptionLabel={option => option.login}
+      getOptionLabel={({ login }) => login}
       isOptionEqualToValue={(option, value) => option.login === value.login}
       renderInput={params => (
         <TextField {...params} label="Search by username" fullWidth />
