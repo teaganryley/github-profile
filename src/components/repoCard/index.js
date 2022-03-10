@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// TODO: updated needs to be expressed
-// Need: assets
+// TODO: updated needs to be expressed as "Updated [days] ago"
 
 const RepoCard = ({
   full_name, description, stargazers_count, updated_at,

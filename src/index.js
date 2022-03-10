@@ -6,10 +6,7 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import GlobalStyle from './styles';
 import App from './routes/app/App';
 import Profile from './routes/profile';
 import Home from './routes/home';
@@ -18,6 +15,7 @@ import NotFound from './routes/notFound';
 ReactDOM.render(
   <BrowserRouter>
     <CssBaseline />
+    <GlobalStyle />
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
