@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import RepoCard from '../../components/repoCard';
 import api from '../../services/api';
 
 const Profile = () => {
@@ -35,9 +36,7 @@ const Profile = () => {
       <h1>Profile page</h1>
       <ul>
         {repoList.map(repo => (
-          <li>
-            {repo.full_name}
-          </li>
+          <RepoCard repo={repo} />
         ))}
       </ul>
       {console.log(profile)}
