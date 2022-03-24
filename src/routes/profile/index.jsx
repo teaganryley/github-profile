@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import UserCard from '../../components/userCard';
 import RepoCard from '../../components/repoCard';
 import api from '../../services/api';
+
+// theming
 
 const Profile = () => {
   const [repoList, setRepoList] = useState([]);
@@ -32,15 +36,16 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Profile page</h1>
-      <ul>
+    <Grid container spacing={2}>
+      <Grid item xs={3}>
+        <UserCard profile={profile} />
+      </Grid>
+      <Grid item xs={9}>
         {repoList.map(repo => (
           <RepoCard repo={repo} />
         ))}
-      </ul>
-      {console.log(profile)}
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

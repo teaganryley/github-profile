@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// next: 1) layout w/ grid
-
-const UserCard = ({ user }) => (
-  <div />
+const UserCard = ({ profile }) => (
+  <div>
+    {profile.name}
+  </div>
 );
 
 UserCard.propTypes = {
-  user: PropTypes.shape({
+  profile: PropTypes.shape({
     avatar_url: PropTypes.string,
     name: PropTypes.string,
     login: PropTypes.string,
